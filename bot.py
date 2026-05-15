@@ -3,7 +3,7 @@ import telebot
 from groq import Groq
 
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
-GROQ_API_KEY = os.environ.get("GEMINI_API_KEY")  # Специально оставляем старое имя, чтобы не переделывать настройки в Railway
+GROQ_API_KEY = os.environ.get("GEMINI_API_KEY")
 
 SYSTEM_INSTRUCTION = """
 You are a helpful business assistant.
@@ -30,9 +30,9 @@ def handle_messages(message):
     chat_histories[chat_id].append({"role": "user", "content": f"[{user_name}]: {message.text}"})
     
     try:
-        # Используем мощную и бесплатную модель Llama 3 70B
+        # Используем актуальную и поддерживаемую модель Llama 3.3
         completion = client.chat.completions.create(
-            model="llama3-70b-8192",
+            model="llama-3.3-70b-versatile",
             messages=chat_histories[chat_id],
             temperature=0.7,
         )
